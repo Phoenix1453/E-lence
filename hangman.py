@@ -11,7 +11,7 @@ def select_category():
 
 used_words = []
 while True:
-    play_again = input("Would you like to play again? (y/n) ")
+    play_again = input("Would you like to play? (y/n) ")
     if play_again.lower() == 'n':
         print("Goodbye!")
         break
