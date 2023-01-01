@@ -6,22 +6,22 @@ def select_random_word(category):
     return random.choice(words)
 
 def select_category():
-    categories = ['meyve', 'şehir', 'eşya']
+    categories = ['fruit', 'city', 'object']
     return random.choice(categories)
 
 used_words = []
 while True:
-    play_again = input("Tekrar oynamak ister misiniz? (e/h) ")
-    if play_again.lower() == 'h':
-        print("İyi oyundu!")
+    play_again = input("Would you like to play again? (y/n) ")
+    if play_again.lower() == 'n':
+        print("Goodbye!")
         break
     category = select_category()
-    if category == 'meyve':
-        print("Bu kelime bir meyvedir.")
-    elif category == 'şehir':
-        print("Bu kelime bir şehirdir.")
+    if category == 'fruit':
+        print("This word is a fruit.")
+    elif category == 'city':
+        print("This word is a city.")
     else:
-        print("Bu kelime bir eşyadır.")
+        print("This word is an object.")
     word = select_random_word(category)
     used_words.append(word)
     hidden_word = ['_'] * len(word)
@@ -30,26 +30,26 @@ while True:
     used_letters = []
     while True:
         print(' '.join(hidden_word))
-        guess = input("Bir harf tahmin edin: ")
+        guess = input("Guess a letter: ")
         if len(guess) != 1:
-            print("Lütfen sadece bir harf tahmin edin.")
+            print("Please enter only one letter.")
         elif guess in used_letters:
-            print("Bu harfi daha önce kullandınız. Lütfen farklı bir harf tahmin edin.")
+            print("You have already used this letter. Please enter a different letter.")
         elif not guess.isalpha():
-            print("Lütfen sadece harf tahmin edin.")
+            print("Please enter only a letter.")
         else:
             used_letters.append(guess)
             if guess.lower() in word:
-                print("Doğru tahmin! Kelime içinde bu harf var.")
+                print("Correct guess! This letter is in the word.")
                 for i in range(len(word)):
                     if word[i] == guess.lower():
                         hidden_word[i] = guess.lower()
                 if '_' not in hidden_word:
-                    print("Tebrikler, kelimeyi buldunuz: " + word)
+                    print("Congratulations, you have found the word: " + word)
                     break
             else:
-                print("Yanlış tahmin! Kelime içinde bu harf yok.")
+                print("Incorrect guess! This letter is not in the word.")
                 incorrect_guesses += 1
                 if incorrect_guesses == max_incorrect_guesses:
-                    print("Maksimum yanlış tahmin sayısına ulaştınız. Kelime: " + word)
+                    print("You have reached the maximum number of incorrect guesses. The word was: " + word)
                     break
